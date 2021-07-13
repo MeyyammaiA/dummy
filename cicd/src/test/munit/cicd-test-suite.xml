@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="cicd-test-suite.xml" />
+	<munit:test name="cicd-test-suite-cicdFlowTest" doc:id="c0a642ac-1ac0-4dcd-bb2b-4c0a1afe3be6" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to cicdFlow" doc:id="93e93e59-3b05-4000-a1d5-0e2343fb00b4" name="cicdFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="8e4d01d8-7702-41ef-a28c-c882527d5717" actual="#[payload]" expected='#["Hi Welcome cicd"]' message="#[&quot;Expected doesn't match the actual output&quot;]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="cicd-test-suite-cicdFlowTest1" doc:id="54b3d6b5-b8d6-4dbe-b75e-29630263b265" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to cicdFlow" doc:id="84d041a1-854e-427c-9d70-c82ad4348486" name="cicdFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="a7f9e63b-c557-4abd-84f0-bd484c708310" expression="#[payload]" is="#[MunitTools::startsWith('Hi')]" message="#[&quot;Output doesn't start with Hi&quot;]"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
